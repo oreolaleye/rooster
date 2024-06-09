@@ -33,7 +33,31 @@ async function main() {
       },
     },
   })
-  console.log({ company1, company2 })
+
+  const availability1 = await prisma.availability.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      userId: 1,
+      day: 1,
+      hours: 8,
+      startAt: '9AM',
+      endAt: '5PM',
+    },
+  });
+
+  const availability2 = await prisma.availability.upsert({
+    where: { id: 2 },
+    update: {},
+    create: {
+      userId: 2,
+      day: 2,
+      hours: 6,
+      startAt: '9AM',
+      endAt: '3PM',
+    },
+  });
+  console.log({ company1, company2, availability1, availability2 })
 }
 main()
   .then(async () => {
